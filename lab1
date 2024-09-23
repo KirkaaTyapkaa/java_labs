@@ -1,0 +1,88 @@
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class main {
+
+    public static void main(String[] args) {
+
+        List<Number> list_of_nums = new ArrayList<>();
+
+        int a = 52;
+        float b = 9.99f;
+        double c = 3.141592;
+        short d = 9;
+        long l = 228L;
+        byte r = 64;
+
+        list_of_nums.add(a);
+        list_of_nums.add(b);
+        list_of_nums.add(c);
+        list_of_nums.add(d);
+        list_of_nums.add(l);
+        list_of_nums.add(r);
+
+        System.out.print("All numbers: \n");
+        for (int i = 0; i < list_of_nums.size(); i++) {
+            System.out.print(list_of_nums.get(i));
+            if (i < list_of_nums.size() - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.print(";");
+
+
+        System.out.print("\n\nAll numbers in integer format: \n");
+        for (int i = 0; i < list_of_nums.size(); i++) {
+            Number num = list_of_nums.get(i);
+            int intValue = (int) num.doubleValue();
+            System.out.print(intValue);
+            if (i < list_of_nums.size() - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println(";");
+
+
+        System.out.print("\nAll numbers in the format of fractional numbers with 2 decimal places: \n");
+        for (int i = 0; i < list_of_nums.size(); i++) {
+            double doubleValue = Double.parseDouble(list_of_nums.get(i).toString());
+            String formattedValue = String.format("%.2f", doubleValue);
+            System.out.print(formattedValue);
+            if (i < list_of_nums.size() - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println(";");
+
+
+        Map<Class<?>, List<Number>> lyst_with_types = new HashMap<>();
+        for (Number num : list_of_nums) {
+            Class<?> type = num.getClass();
+            if (!lyst_with_types.containsKey(type)) {
+                lyst_with_types.put(type, new ArrayList<>());
+            }
+            lyst_with_types.get(type).add(num);
+        }
+
+        System.out.println("\nAll numbers by type: ");
+        for (Map.Entry<Class<?>, List<Number>> temp : lyst_with_types.entrySet()) {
+            System.out.print("Type: " + temp.getKey().getSimpleName() + " ");
+            for (int i = 0; i < temp.getValue().size(); i++) {
+                System.out.print(temp.getValue().get(i));
+            }
+            System.out.println(";");
+        }
+
+        double sum = 0;
+        System.out.print("\nSum of all numbers: \n");
+        for (Number num : list_of_nums) {
+            sum += (double) num.doubleValue();
+
+        }
+        System.out.print(sum + ";");
+
+    }
+}
